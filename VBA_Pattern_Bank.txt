@@ -1,0 +1,153 @@
+===== VBA Pattern Bank =====
+
+[Category: Worksheet Operations]
+Sheets("Sheet1").Activate
+Sheets("Sheet1").Select
+
+Dim ws As Worksheet
+Set ws = ThisWorkbook.Sheets.Add(After:=Sheets(Sheets.Count))
+ws.Name = "NewSheet"
+
+Application.DisplayAlerts = False
+Sheets("SheetToDelete").Delete
+Application.DisplayAlerts = True
+
+Sheets("Sheet1").Copy After:=Sheets(Sheets.Count)
+
+
+[Category: Cell Copying]
+Description: Copy value from A1 to A2
+Sheets("Sheet1").Range("A2").Value = Sheets("Sheet1").Range("A1").Value
+
+[Category: Looping]
+Description: Loop through range A1 to A10
+Dim cell As Range
+For Each cell In Range("A1:A10")
+    Debug.Print cell.Value
+Next cell
+
+
+
+
+
+[Category: Range Operations]
+Dim val As Variant
+val = Sheets("Sheet1").Range("A1").Value
+Sheets("Sheet1").Range("B1").Value = "Hello"
+
+Dim cell As Range
+For Each cell In Sheets("Sheet1").Range("A1:A10")
+    ' Do something with cell.Value
+Next cell
+
+Dim lastRow As Long
+lastRow = Sheets("Sheet1").Cells(Rows.Count, 1).End(xlUp).Row
+
+Sheets("Sheet1").Range("A1:C10").Copy Destination:=Sheets("Sheet2").Range("A1")
+Sheets("Sheet1").Range("A1:C10").ClearContents
+
+[Category: Loops and Conditions]
+For i = 1 To 10
+    ' code
+Next i
+
+i = 1
+While i <= 10
+    ' code
+    i = i + 1
+Wend
+
+If Sheets("Sheet1").Range("A1").Value > 100 Then
+    MsgBox "Value is greater than 100"
+Else
+    MsgBox "Value is 100 or less"
+End If
+
+Select Case Sheets("Sheet1").Range("A1").Value
+    Case 1
+        MsgBox "Value is 1"
+    Case 2, 3, 4
+        MsgBox "Value is 2, 3, or 4"
+    Case Else
+        MsgBox "Other value"
+End Select
+
+[Category: Arrays and Collections]
+Dim arr(1 To 5) As Integer
+For i = 1 To 5
+    arr(i) = i * 10
+Next i
+
+For i = LBound(arr) To UBound(arr)
+    Debug.Print arr(i)
+Next i
+
+Dim coll As Collection
+Set coll = New Collection
+coll.Add "Apple"
+coll.Add "Banana"
+MsgBox coll(1)
+
+[Category: User Interaction]
+Dim userInput As String
+userInput = InputBox("Enter your name:")
+MsgBox "Hello, " & userInput
+
+resp = MsgBox("Do you want to continue?", vbYesNo + vbQuestion)
+If resp = vbYes Then
+    MsgBox "You chose Yes"
+Else
+    MsgBox "You chose No"
+End If
+
+[Category: File and Folder Operations]
+Dim wb As Workbook
+Set wb = Workbooks.Open("C:\\path\\to\\file.xlsx")
+
+ThisWorkbook.Save
+
+Dim fso As Object
+Set fso = CreateObject("Scripting.FileSystemObject")
+If fso.FileExists("C:\\path\\file.txt") Then
+    MsgBox "File exists"
+Else
+    MsgBox "File does not exist"
+End If
+
+If Not fso.FolderExists("C:\\NewFolder") Then
+    fso.CreateFolder ("C:\\NewFolder")
+End If
+
+[Category: Error Handling]
+On Error GoTo ErrHandler
+' Code here
+Exit Sub
+
+ErrHandler:
+MsgBox "Error " & Err.Number & ": " & Err.Description
+Resume Next
+
+[Category: UserForms]
+UserForm1.Show
+Dim name As String
+name = UserForm1.txtName.Text
+Unload UserForm1
+
+[Category: String Handling]
+Dim fullName As String
+fullName = "John" & " " & "Doe"
+
+If InStr(1, "Hello World", "World") > 0 Then
+    MsgBox "Found!"
+End If
+
+newText = Replace("Hello World", "World", "VBA")
+
+[Category: Dates and Times]
+Dim today As Date
+today = Date
+
+MsgBox Format(Date, "dd-mmm-yyyy")
+
+Dim diff As Long
+diff = DateDiff("d", #1/1/2024#, Date)
